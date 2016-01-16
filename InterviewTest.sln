@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewModel", "InterviewModel\InterviewModel.csproj", "{072F7780-315C-4DEF-980E-E0E833FC4276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewService", "InterviewService\InterviewService.csproj", "{327C0DB1-0E10-47EC-B63E-54D3D02A4A7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewUI", "InterviewUI\InterviewUI.csproj", "{4AB80064-D1EA-4F44-B5E4-6DDE7B0CF130}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{072F7780-315C-4DEF-980E-E0E833FC4276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072F7780-315C-4DEF-980E-E0E833FC4276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072F7780-315C-4DEF-980E-E0E833FC4276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072F7780-315C-4DEF-980E-E0E833FC4276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327C0DB1-0E10-47EC-B63E-54D3D02A4A7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327C0DB1-0E10-47EC-B63E-54D3D02A4A7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327C0DB1-0E10-47EC-B63E-54D3D02A4A7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327C0DB1-0E10-47EC-B63E-54D3D02A4A7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AB80064-D1EA-4F44-B5E4-6DDE7B0CF130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AB80064-D1EA-4F44-B5E4-6DDE7B0CF130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AB80064-D1EA-4F44-B5E4-6DDE7B0CF130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AB80064-D1EA-4F44-B5E4-6DDE7B0CF130}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
