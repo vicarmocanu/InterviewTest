@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InterviewModel.Controller
 {
-    class AssignedSalePersonCtr
+    public class AssignedSalePersonCtr
     {
         private static AssignedSalePersonCtr instance = null;
 

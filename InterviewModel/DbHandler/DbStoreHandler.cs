@@ -11,7 +11,6 @@ namespace InterviewModel.DbHandler
 {
     class DbStoreHandler
     {
-        private static SqlCommand dbCmd = null;
         private static SqlParameter parmStoreId = new SqlParameter("@storeId", SqlDbType.Int);
         private static SqlParameter parmDistrictId = new SqlParameter("@districtId", SqlDbType.Int);
         private static SqlParameter parmName = new SqlParameter("@name", SqlDbType.NVarChar, 50);

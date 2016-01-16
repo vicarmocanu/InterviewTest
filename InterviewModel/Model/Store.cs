@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterviewModel.Model
 {
-    class Store
+    public class Store
     {
         private int storeId;
         private int districtId;
