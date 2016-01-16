@@ -9,7 +9,7 @@ using System.Data;
 
 namespace InterviewModel.DbHandler
 {
-    class DbAssignedSalePersonHandler
+    class DbAssignedSalePersonHandler : IAssignedSalePerson
     {
         private static SqlCommand dbCmd = null;
         private static SqlParameter parmSalePersonId = new SqlParameter("@salePersonId", SqlDbType.Int);
@@ -27,11 +27,11 @@ namespace InterviewModel.DbHandler
 
 
         //Insert Assigned Sale Person
-        public int assignSecondarySalePerson(int salePersonId, int districtId)
+        public int assignSalePerson(int salePersonId, int districtId)
         {
             int result = -1;
             dbCmd = new SqlCommand();
-            string sqlQuery = "INSERT INTO SecondarySalePerson(salePersonId, districtId) VALUES " +
+            string sqlQuery = "INSERT INTO AssignedSalePerson(salePersonId, districtId) VALUES " +
                 "(@salePersonId, @districtId)";
             dbCmd = DbConnection.GetDbCommand(sqlQuery);
 
@@ -52,7 +52,7 @@ namespace InterviewModel.DbHandler
 
             return result;
         }
-
+        //Delete Assigned Sale Person
         public int deleteAssignedPerson(int salePersonId)
         {
             int result = -1;

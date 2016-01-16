@@ -26,32 +26,5 @@ namespace InterviewModel.DbHandler
 
             return store;
         }
-
-        public List<Store> getStoresOnDistrict(int districtId)
-        {
-            List<Store> returnList = new List<Store>();
-
-            dbCmd = new SqlCommand();
-            string sqlQuery = "SELECT * FROM Store WHERE districtId = @districtId";
-            dbCmd = DbConnection.GetDbCommand(sqlQuery);
-
-            parmDistrictId.Value = districtId;
-            dbCmd.Parameters.Add(parmDistrictId);
-
-            IDataReader dbReader;
-            dbReader = dbCmd.ExecuteReader();
-
-            while (dbReader.Read())
-            {
-                Store store = new Store();
-                store = createStore(dbReader);
-                returnList.Add(store);
-            }
-
-            dbCmd.Parameters.Clear();
-            DbConnection.Close();
-
-            return returnList;
-        }
     }
 }

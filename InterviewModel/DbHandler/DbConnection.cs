@@ -11,7 +11,6 @@ namespace InterviewModel.DbHandler
     {
         private static String connectionString = @"Data Source=MDU\SQLEXPRESS; Initial Catalog=TestDB; Integrated Security=True";
         //change here to own SQL Serve
-        //private static String connectionString = @"Data Source= THERAK\SQLEXPRESS; Initial Catalog= Cinema; Integrated Security=SSPI";
         private static SqlConnection dbConnection = new SqlConnection(connectionString);
         private static SqlCommand dbCommand = new SqlCommand(null, dbConnection);
 

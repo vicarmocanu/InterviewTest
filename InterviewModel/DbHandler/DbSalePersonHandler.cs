@@ -24,7 +24,7 @@ namespace InterviewModel.DbHandler
         private static SqlParameter parmEmail = new SqlParameter("@email", SqlDbType.NVarChar, 50);
         private static SqlParameter parmPhoneNo = new SqlParameter("@phoneNo", SqlDbType.Int);
 
-        //create a reservation object based on the data reader
+        //create a SalePerson object based on the data reader
         private static SalePerson createSalePerson(IDataReader dbReader)
         {
             SalePerson salePerson = new SalePerson();
@@ -38,45 +38,6 @@ namespace InterviewModel.DbHandler
             salePerson.PhoneNo = Convert.ToInt32(dbReader["phoneNo"].ToString());
 
             return salePerson;
-        }
-
-        //needs to go to district !!!!
-        public List<SalePerson> getDistrictSalePersons(int districtId)
-        {
-            List<SalePerson> returnList = new List<SalePerson>();
-
-            dbCmd = new SqlCommand();
-            string sqlQuery = "SELECT Saleperson.id, SalePerson.lastName, SalePerson.firstName, SalePerson.email, SalePerson.phoneNo FROM SalePersons" +
-                "JOIN SecondarySalePerson ON SalePerson.id = SecondarySalePerson.salePersonId" +
-                "JOIN District ON SecondarySalePerson.districtId = District.districtId" +
-                "WHERE District.districtId = @districtId";
-            dbCmd = DbConnection.GetDbCommand(sqlQuery);
-
-            parmDistrictId.Value = districtId;
-            dbCmd.Parameters.Add(parmDistrictId);
-
-            IDataReader dbReader;
-            dbReader = dbCmd.ExecuteReader();
-
-            while (dbReader.Read())
-            {
-                SalePerson salesPerson = new SalePerson();
-
-                salesPerson.Id = Convert.ToInt32(dbReader["id"].ToString());
-                salesPerson.LastName = dbReader["lastName"].ToString();
-                salesPerson.FirstName = dbReader["firstName"].ToString();
-                salesPerson.Email = dbReader["email"].ToString();
-                salesPerson.PhoneNo = Convert.ToInt32(dbReader["phoneNo"].ToString());
-
-                returnList.Add(salesPerson);
-
-            }
-
-            dbCmd.Parameters.Clear();
-            DbConnection.Close();
-
-            return returnList;
-
         }
     }
 }

@@ -10,70 +10,182 @@ using System.Data;
 
 namespace InterviewModel.DbHandler
 {
-    class DbDistrictHandler
+    class DbDistrictHandler : IDistrict
     {
         private static SqlCommand dbCmd = null;
-        private static SqlParameter parmSalePersonId = new SqlParameter("@salePersonId", SqlDbType.Int);
         private static SqlParameter parmDistrictId = new SqlParameter("@districtId", SqlDbType.Int);
+        private static SqlParameter parmPrimeSalePersId = new SqlParameter("@primeSalePersId", SqlDbType.Int);
+        private static SqlParameter parmName = new SqlParameter("@name", SqlDbType.NVarChar, 50);
 
-        private static AssignedSalePerson createSecondarySalePerson(IDataReader dbReader)
+        private static District createDistrict(IDataReader dbReader)
         {
-            AssignedSalePerson assignedSaleperson = new AssignedSalePerson();
+            District district = new District();
 
-            assignedSaleperson.SalePersonId = Convert.ToInt32(dbReader["salePersonId"].ToString());
-            assignedSaleperson.DistrictId = Convert.ToInt32(dbReader["districtId"].ToString());
+            district.DistrictId = Convert.ToInt32(dbReader["districtId"].ToString());
+            district.PrimSalePersId = Convert.ToInt32(dbReader["primSalePersId"].ToString());
+            district.Name = dbReader["name"].ToString();
 
-            return assignedSaleperson;
+            return district;
         }
 
-
-        //Insert Assigned Sale Person
-        public int assignSecondarySalePerson(int salePersonId, int districtId)
+        //Insert a new District
+        public int addDistrict(District district)
         {
             int result = -1;
             dbCmd = new SqlCommand();
-            string sqlQuery = "INSERT INTO SecondarySalePerson(salePersonId, districtId) VALUES " +
-                "(@salePersonId, @districtId)";
+            string sqlQuery = "INSERT INTO District VALUES " +
+                "(@districtId, @primSalePersId, @name)";
             dbCmd = DbConnection.GetDbCommand(sqlQuery);
 
-            parmSalePersonId.Value = salePersonId;
-            dbCmd.Parameters.Add(parmSalePersonId);
+            parmDistrictId.Value = district.DistrictId;
+            dbCmd.Parameters.Add(parmDistrictId);
+
+            parmPrimeSalePersId.Value = district.PrimSalePersId;
+            dbCmd.Parameters.Add(parmPrimeSalePersId);
+
+            parmName.Value = district.Name;
+            dbCmd.Parameters.Add(parmName);
+
+            try
+            {
+                result = dbCmd.ExecuteNonQuery();
+                dbCmd.Parameters.Clear();
+                DbConnection.Close();
+            }
+            catch (SqlException)
+            {
+
+            }
+
+            return result;
+        }
+
+        //Show all Districts
+        public List<District> getAllDistricts()
+        {
+            List<District> returnList = new List<District>();
+
+            dbCmd = new SqlCommand();
+            string sqlQuery = "SELECT * FROM District";
+            dbCmd = DbConnection.GetDbCommand(sqlQuery);
+
+            IDataReader dbReader;
+            dbReader = dbCmd.ExecuteReader();
+
+            while (dbReader.Read())
+            {
+                District district = new District();
+                district = createDistrict(dbReader);
+                returnList.Add(district);
+
+            }
+
+            dbCmd.Parameters.Clear();
+            DbConnection.Close();
+
+            return returnList;
+
+        }
+
+        //Change Primary Sale Person
+        public int changePrimarySalesPerson(int districtid, int primeSalePersId)
+        {
+            int result = -1;
+
+            dbCmd = new SqlCommand();
+
+            string sqlQuery = "UPDATE District SET primarySalePersonId = @districtId WHERE districtID = @primeSalePersId";
+            dbCmd = DbConnection.GetDbCommand(sqlQuery);
+
+            parmDistrictId.Value = districtid;
+            dbCmd.Parameters.Add(districtid);
+
+            parmPrimeSalePersId.Value = primeSalePersId;
+            dbCmd.Parameters.Add(primeSalePersId);
+
+            try
+            {
+                result = dbCmd.ExecuteNonQuery();
+                dbCmd.Parameters.Clear();
+                DbConnection.Close();
+            }
+            catch (SqlException)
+            { }
+
+            return result;
+
+        }
+
+        //All district Sales Persons
+        public List<SalePerson> getDistrictSalePersons(int districtId)
+        {
+            List<SalePerson> returnList = new List<SalePerson>();
+
+            dbCmd = new SqlCommand();
+            string sqlQuery = "SELECT Saleperson.id, SalePerson.lastName, SalePerson.firstName, SalePerson.email, SalePerson.phoneNo FROM SalePersons" +
+                "JOIN SecondarySalePerson ON SalePerson.id = SecondarySalePerson.salePersonId" +
+                "JOIN District ON SecondarySalePerson.districtId = District.districtId" +
+                "WHERE District.districtId = @districtId";
+            dbCmd = DbConnection.GetDbCommand(sqlQuery);
 
             parmDistrictId.Value = districtId;
             dbCmd.Parameters.Add(parmDistrictId);
 
-            try
-            {
-                result = dbCmd.ExecuteNonQuery();
-                dbCmd.Parameters.Clear();
-                DbConnection.Close();
-            }
-            catch (SqlException)
-            { }
+            IDataReader dbReader;
+            dbReader = dbCmd.ExecuteReader();
 
-            return result;
+            while (dbReader.Read())
+            {
+                SalePerson salesPerson = new SalePerson();
+
+                salesPerson.Id = Convert.ToInt32(dbReader["id"].ToString());
+                salesPerson.LastName = dbReader["lastName"].ToString();
+                salesPerson.FirstName = dbReader["firstName"].ToString();
+                salesPerson.Email = dbReader["email"].ToString();
+                salesPerson.PhoneNo = Convert.ToInt32(dbReader["phoneNo"].ToString());
+
+                returnList.Add(salesPerson);
+
+            }
+
+            dbCmd.Parameters.Clear();
+            DbConnection.Close();
+
+            return returnList;
+
         }
 
-        public int deleteAssignedPerson(int salePersonId)
+        //Get all district Stores
+        public List<Store> getStoresOnDistrict(int districtId)
         {
-            int result = -1;
+            List<Store> returnList = new List<Store>();
+
             dbCmd = new SqlCommand();
-            string sqlQuery = "DELETE FROM AssignedSalesPerson WHERE salespersonId = @salePersonId";
+            string sqlQuery = "SELECT * FROM Store WHERE districtId = @districtId";
             dbCmd = DbConnection.GetDbCommand(sqlQuery);
 
-            parmSalePersonId.Value = salePersonId;
-            dbCmd.Parameters.Add(parmSalePersonId);
+            parmDistrictId.Value = districtId;
+            dbCmd.Parameters.Add(parmDistrictId);
 
-            try
+            IDataReader dbReader;
+            dbReader = dbCmd.ExecuteReader();
+
+            while (dbReader.Read())
             {
-                result = dbCmd.ExecuteNonQuery();
-                dbCmd.Parameters.Clear();
-                DbConnection.Close();
-            }
-            catch (SqlException)
-            { }
+                Store store = new Store();
+                store.StoreId = Convert.ToInt32(dbReader["storeId"].ToString());
+                store.DistrictId = Convert.ToInt32(dbReader["districtId"].ToString());
+                store.Name = dbReader["name"].ToString();
 
-            return result;
+                returnList.Add(store);
+            }
+
+            dbCmd.Parameters.Clear();
+            DbConnection.Close();
+
+            return returnList;
         }
+
+
     }
 }

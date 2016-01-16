@@ -40,20 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\AssignedSalePersonCtr.cs" />
+    <Compile Include="Controller\DistrictCtr.cs" />
     <Compile Include="DbHandler\DbAssignedSalePersonHandler.cs" />
     <Compile Include="DbHandler\DbConnection.cs" />
     <Compile Include="DbHandler\DbDistrictHandler.cs" />
     <Compile Include="DbHandler\DbSalePersonHandler.cs" />
     <Compile Include="DbHandler\DbStoreHandler.cs" />
+    <Compile Include="DbHandler\IAssignedSalePerson.cs" />
+    <Compile Include="DbHandler\IDistrict.cs" />
     <Compile Include="Model\AssignedSalePerson.cs" />
     <Compile Include="Model\District.cs" />
     <Compile Include="Model\SalePerson.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
