@@ -13,23 +13,23 @@ namespace InterviewService
     public interface IDistrictService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "create")]
-        int addDistrict(int districtid, int primSalePersId, string name);
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "addDistrict", BodyStyle = WebMessageBodyStyle.Wrapped)]
+        int addDistrict(int districtId, int primarySalePersonId, string name);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "findall")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "getAllDistricts")]
         List<District> getAllDistricts();
 
         [OperationContract]
-        [WebInvoke(Method = "PUT", ResponseFormat = WebMessageFormat.Json, UriTemplate = "edit")]
+        [WebInvoke(Method = "PUT", ResponseFormat = WebMessageFormat.Json, UriTemplate = "changePrimarySaleperson", BodyStyle = WebMessageBodyStyle.Wrapped)]
         int changePrimarySalesPerson(int districtid, int primeSalePersId);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "findall")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "getDistrictSalePersons/?districtid={districtId}")]
         List<SalePerson> getDistrictSalePersons(int districtId);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "findall")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "getStoresOnDistrict/?districtid={districtId}")]
         List<Store> getStoresOnDistrict(int districtId);       
     }
 

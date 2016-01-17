@@ -13,11 +13,11 @@ namespace InterviewService
     public interface IAssignedSalePersonService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate ="create")]
+        [WebInvoke(Method = "POST", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, UriTemplate = "assignSalePerson", BodyStyle = WebMessageBodyStyle.Wrapped)]
         int assignSalePerson(int salePersonId, int districtId);
 
         [OperationContract]
-        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, RequestFormat =WebMessageFormat.Json, UriTemplate = "delete")]
+        [WebInvoke(Method = "DELETE", ResponseFormat = WebMessageFormat.Json, RequestFormat =WebMessageFormat.Json, UriTemplate = "deleteAssignedPerson/?salePersonId={salePersonId}")]
         int deleteAssignedPerson(int salePersonId);
     }
 
