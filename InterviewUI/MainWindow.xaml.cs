@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.Serialization;
+using System.Net;
+using System.Web;
+using Newtonsoft.Json;
 
 namespace InterviewUI
 {
@@ -21,10 +24,22 @@ namespace InterviewUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static DistrictSrv.IDistrictService srv = new DistrictSrv.DistrictServiceClient();
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
             
         }
+
+        public void loadDistrictGrid()
+        {
+            districtGrid.ItemsSource = srv.getAllDistricts();
+        }
+
     }
 }

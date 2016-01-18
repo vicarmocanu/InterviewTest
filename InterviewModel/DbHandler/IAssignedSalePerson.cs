@@ -8,7 +8,7 @@ namespace InterviewModel.DbHandler
 {
     interface IAssignedSalePerson
     {
-        int assignSalePerson(int salePersonId, int districtId);
-        int deleteAssignedPerson(int salePersonId);
+        void assignSalePerson(int salePersonId, int districtId);
+        void deleteAssignedPerson(int salePersonId);
     }
 }

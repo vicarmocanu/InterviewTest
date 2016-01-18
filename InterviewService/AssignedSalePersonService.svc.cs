@@ -17,42 +17,37 @@ namespace InterviewService
         private static readonly System.Object obj1 = new System.Object();
         private static readonly System.Object obj2 = new System.Object();
 
-        public int assignSalePerson(int salePersonId, int districtId)
+        public void assignSalePerson(int salePersonId, int districtId)
         {
-
-            int result = -1;
-
             if (System.Threading.Monitor.TryEnter(obj1, 45000))
             {
                 try
                 {
-                    result = assignedCtr.assignSalePerson(salePersonId, districtId);
+                   assignedCtr.assignSalePerson(salePersonId, districtId);
                 }
                 finally
                 {
                     System.Threading.Monitor.Exit(obj1);
                 }
             }
-            return result;
         }
 
-        public int deleteAssignedPerson(int salePersonId)
+        public void deleteAssignedPerson(int salePersonId)
         {
-            int result = -1;
+            
 
             if (System.Threading.Monitor.TryEnter(obj2, 45000))
             {
                 try
                 {
-                    result = assignedCtr.deleteAssignedPerson(salePersonId);
+                    assignedCtr.deleteAssignedPerson(salePersonId);
                 }
                 finally
                 {
                     System.Threading.Monitor.Exit(obj2);
                 }
             }
-
-            return result;
+           
         }
 
 

@@ -27,9 +27,8 @@ namespace InterviewModel.DbHandler
 
 
         //Insert Assigned Sale Person
-        public int assignSalePerson(int salePersonId, int districtId)
+        public void assignSalePerson(int salePersonId, int districtId)
         {
-            int result = -1;
             dbCmd = new SqlCommand();
             string sqlQuery = "INSERT INTO AssignedSalePerson(salePersonId, districtId) VALUES " +
                 "(@salePersonId, @districtId)";
@@ -43,21 +42,18 @@ namespace InterviewModel.DbHandler
 
             try
             {
-                result = dbCmd.ExecuteNonQuery();
                 dbCmd.Parameters.Clear();
                 DbConnection.Close();
             }
             catch (SqlException)
             { }
 
-            return result;
         }
         //Delete Assigned Sale Person
-        public int deleteAssignedPerson(int salePersonId)
+        public void deleteAssignedPerson(int salePersonId)
         {
-            int result = -1;
 
-            string sqlQuery = "DELETE FROM AssignedSalesPerson WHERE salespersonId = @salePersonId";
+            string sqlQuery = "DELETE FROM AssignedSalesPerson WHERE salePersonId = @salePersonId";
             dbCmd = DbConnection.GetDbCommand(sqlQuery);
 
             parmSalePersonId.Value = salePersonId;
@@ -65,14 +61,11 @@ namespace InterviewModel.DbHandler
 
             try
             {
-                result = dbCmd.ExecuteNonQuery();
                 dbCmd.Parameters.Clear();
                 DbConnection.Close();
             }
             catch (SqlException)
             { }
-
-            return result;
         }
     }
 }

@@ -23,21 +23,19 @@ namespace InterviewModel.Controller
 
         public AssignedSalePersonCtr() { }
 
-        public int assignSalePerson(int salePersonId, int districtId)
+        public void assignSalePerson(int salePersonId, int districtId)
         {
             IAssignedSalePerson _dbAssignedSalePerson = new DbAssignedSalePersonHandler();
 
             AssignedSalePerson assignedSale = new AssignedSalePerson();
             assignedSale.SalePersonId = salePersonId;
             assignedSale.DistrictId = districtId;
-
-            return _dbAssignedSalePerson.assignSalePerson(salePersonId, districtId);
         }
 
-        public int deleteAssignedPerson(int salePersonId)
+        public void deleteAssignedPerson(int salePersonId)
         {
             IAssignedSalePerson _dbAssignedSalePerson = new DbAssignedSalePersonHandler();
-            return _dbAssignedSalePerson.deleteAssignedPerson(salePersonId);
+            _dbAssignedSalePerson.deleteAssignedPerson(salePersonId);
         }
     }
 }

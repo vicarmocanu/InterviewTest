@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:15236/DistrictService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/InterviewService" />
+  <xs:element name="addDistrict">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="districtId" type="xs:int" />
+        <xs:element minOccurs="0" name="primarySalePersonId" type="xs:int" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addDistrictResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addDistrictResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAllDistricts">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAllDistrictsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/InterviewService" minOccurs="0" name="getAllDistrictsResult" nillable="true" type="q1:ArrayOfDistrict" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="changePrimarySalesPerson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="districtid" type="xs:int" />
+        <xs:element minOccurs="0" name="primeSalePersId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="changePrimarySalesPersonResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="changePrimarySalesPersonResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getDistrictSalePersons">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="districtId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getDistrictSalePersonsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/InterviewService" minOccurs="0" name="getDistrictSalePersonsResult" nillable="true" type="q2:ArrayOfSalePerson" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getStoresOnDistrict">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="districtId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getStoresOnDistrictResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/InterviewService" minOccurs="0" name="getStoresOnDistrictResult" nillable="true" type="q3:ArrayOfStore" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

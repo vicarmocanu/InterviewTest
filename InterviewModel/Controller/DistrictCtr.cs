@@ -23,7 +23,7 @@ namespace InterviewModel.Controller
 
         public DistrictCtr() { }
 
-        public int addDistrict(int districtid, int primSalePersId, string name)
+        public void addDistrict(int districtid, int primSalePersId, string name)
         {
 
             IDistrict _dbDistrict = new DbDistrictHandler();
@@ -34,7 +34,7 @@ namespace InterviewModel.Controller
             district.PrimSalePersId = primSalePersId;
             district.Name = name;
 
-            return _dbDistrict.addDistrict(district);
+           _dbDistrict.addDistrict(district);
 
         }
 
@@ -49,7 +49,7 @@ namespace InterviewModel.Controller
 
         }
 
-        public int changePrimarySalesPerson(int districtid, int primeSalePersId)
+        public void changePrimarySalesPerson(int districtid, int primeSalePersId)
         {
 
             IDistrict _dbDistrict = new DbDistrictHandler();
@@ -58,8 +58,7 @@ namespace InterviewModel.Controller
             district.DistrictId = districtid;
             district.PrimSalePersId = primeSalePersId;
 
-            return _dbDistrict.changePrimarySalesPerson(districtid, primeSalePersId);
-
+            _dbDistrict.changePrimarySalesPerson(districtid, primeSalePersId);
         }
 
         public List<SalePerson> getDistrictSalePersons(int districtId)

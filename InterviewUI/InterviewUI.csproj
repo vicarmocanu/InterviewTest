@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -98,6 +102,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\InterviewService.District.datasource" />
     <None Include="Properties\DataSources\InterviewService.SalePerson.datasource" />
     <None Include="Properties\DataSources\InterviewService.Store.datasource" />
@@ -129,12 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\InterviewService\InterviewService.csproj">
-      <Project>{327c0db1-0e10-47ec-b63e-54d3d02a4a7b}</Project>
-      <Name>InterviewService</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\AssignedPersonSrv\AssignedSalePersonService.disco" />
@@ -169,6 +168,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InterviewModel\InterviewModel.csproj">
+      <Project>{072f7780-315c-4def-980e-e0e833fc4276}</Project>
+      <Name>InterviewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterviewService\InterviewService.csproj">
+      <Project>{327c0db1-0e10-47ec-b63e-54d3d02a4a7b}</Project>
+      <Name>InterviewService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

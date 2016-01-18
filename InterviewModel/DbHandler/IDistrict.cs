@@ -9,9 +9,9 @@ namespace InterviewModel.DbHandler
 {
     interface IDistrict
     {
-        int addDistrict(District district);
+        void addDistrict(District district);
         List<District> getAllDistricts();
-        int changePrimarySalesPerson(int districtid, int primeSalePersId);
+        void changePrimarySalesPerson(int districtid, int primeSalePersId);
         List<SalePerson> getDistrictSalePersons(int districtId);
         List<Store> getStoresOnDistrict(int districtId);
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using InterviewModel.Controller;
+using InterviewModel.Model;
 
 namespace InterviewService
 {
@@ -14,40 +15,35 @@ namespace InterviewService
         private static readonly System.Object obj4 = new System.Object();
         private static readonly System.Object obj5 = new System.Object();
 
-        public int addDistrict(int districtid, int primSalePersId, string name)
+        public void addDistrict(int districtid, int primSalePersId, string name)
         {
-            int result = -1;
-
             if (System.Threading.Monitor.TryEnter(obj1, 45000))
             {
                 try
                 {
-                    result = districtCtr.addDistrict(districtid, primSalePersId, name);
+                   districtCtr.addDistrict(districtid, primSalePersId, name);
                 }
                 finally
                 {
                     System.Threading.Monitor.Exit(obj1);
                 }
             }
-            return result;
         }
 
-        public int changePrimarySalesPerson(int districtid, int primeSalePersId)
+        public void changePrimarySalesPerson(int districtid, int primeSalePersId)
         {
-            int result = -1;
 
             if (System.Threading.Monitor.TryEnter(obj2, 45000))
             {
                 try
                 {
-                    result = districtCtr.changePrimarySalesPerson(districtid, primeSalePersId);
+                    districtCtr.changePrimarySalesPerson(districtid, primeSalePersId);
                 }
                 finally
                 {
                     System.Threading.Monitor.Exit(obj2);
                 }
             }
-            return result;
         }
 
         public List<District> getAllDistricts()

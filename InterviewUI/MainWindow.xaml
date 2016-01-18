@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="549.33" Width="1040.823">
     <Grid Margin="0,0,-0.4,-0.4">
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="520" VerticalAlignment="Top" Width="1035" Margin="0,0,-0.2,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="189*"/>
+            <ColumnDefinition Width="328*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="520" VerticalAlignment="Top" Width="1035" Margin="0,0,-0.2,0" Grid.ColumnSpan="2">
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -16,9 +20,10 @@
                         <ColumnDefinition Width="6*"/>
                         <ColumnDefinition Width="503*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="472" Width="324" Margin="2,10,0,0" Grid.Column="2" Grid.ColumnSpan="2"/>
-                    <DataGrid x:Name="dataGrid1" Grid.Column="3" HorizontalAlignment="Left" Margin="329,10,0,0" VerticalAlignment="Top" Height="207" Width="579"/>
+                    <DataGrid x:Name="districtGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="472" Width="259" Margin="2,10,0,0" Grid.Column="2" Grid.ColumnSpan="2" SelectionChanged="dataGrid_SelectionChanged"/>
+                        <DataGrid x:Name="dataGrid1" Grid.Column="3" HorizontalAlignment="Left" Margin="329,10,0,0" VerticalAlignment="Top" Height="207" Width="579"/>
                     <DataGrid x:Name="dataGrid2" Grid.Column="3" HorizontalAlignment="Left" Margin="330,241,0,0" VerticalAlignment="Top" Height="204" Width="368"/>
+                    <Grid x:Name="GridTest" Grid.Column="3" HorizontalAlignment="Left" Height="186" Margin="775,259,0,0" VerticalAlignment="Top" Width="179"/>
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem">

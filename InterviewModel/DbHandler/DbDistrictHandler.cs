@@ -29,9 +29,8 @@ namespace InterviewModel.DbHandler
         }
 
         //Insert a new District
-        public int addDistrict(District district)
+        public void addDistrict(District district)
         {
-            int result = -1;
             dbCmd = new SqlCommand();
             string sqlQuery = "INSERT INTO District VALUES " +
                 "(@districtId, @primSalePersId, @name)";
@@ -48,7 +47,6 @@ namespace InterviewModel.DbHandler
 
             try
             {
-                result = dbCmd.ExecuteNonQuery();
                 dbCmd.Parameters.Clear();
                 DbConnection.Close();
             }
@@ -56,12 +54,10 @@ namespace InterviewModel.DbHandler
             {
 
             }
-
-            return result;
         }
 
         //Show all Districts
-        public List<District> getAllDistricts()
+        public List<District> getAllDistricts() // dafq is wrong here?
         {
             List<District> returnList = new List<District>();
 
@@ -75,6 +71,7 @@ namespace InterviewModel.DbHandler
             while (dbReader.Read())
             {
                 District district = new District();
+
                 district = createDistrict(dbReader);
                 returnList.Add(district);
 
@@ -88,13 +85,11 @@ namespace InterviewModel.DbHandler
         }
 
         //Change Primary Sale Person
-        public int changePrimarySalesPerson(int districtid, int primeSalePersId)
+        public void changePrimarySalesPerson(int districtid, int primeSalePersId)
         {
-            int result = -1;
-
             dbCmd = new SqlCommand();
 
-            string sqlQuery = "UPDATE District SET primarySalePersonId = @districtId WHERE districtID = @primeSalePersId";
+            string sqlQuery = "UPDATE District SET primSalePersId = @primeSalePersId WHERE districtID = @districtId";
             dbCmd = DbConnection.GetDbCommand(sqlQuery);
 
             parmDistrictId.Value = districtid;
@@ -105,15 +100,11 @@ namespace InterviewModel.DbHandler
 
             try
             {
-                result = dbCmd.ExecuteNonQuery();
                 dbCmd.Parameters.Clear();
                 DbConnection.Close();
             }
             catch (SqlException)
             { }
-
-            return result;
-
         }
 
         //All district Sales Persons
@@ -122,10 +113,7 @@ namespace InterviewModel.DbHandler
             List<SalePerson> returnList = new List<SalePerson>();
 
             dbCmd = new SqlCommand();
-            string sqlQuery = "SELECT Saleperson.id, SalePerson.lastName, SalePerson.firstName, SalePerson.email, SalePerson.phoneNo FROM SalePersons" +
-                "JOIN SecondarySalePerson ON SalePerson.id = SecondarySalePerson.salePersonId" +
-                "JOIN District ON SecondarySalePerson.districtId = District.districtId" +
-                "WHERE District.districtId = @districtId";
+            string sqlQuery = "SELECT SalesPerson.id, SalesPerson.lastName, SalesPerson.firstName, SalesPerson.userName, SalesPerson.pass, SalesPerson.email, SalesPerson.phoneNo FROM SalesPerson JOIN AssignedSalePerson ON SalesPerson.id = AssignedSalePerson.salePersonId JOIN District ON AssignedSalePerson.districtId = District.districtId WHERE District.districtId = @districtId ";
             dbCmd = DbConnection.GetDbCommand(sqlQuery);
 
             parmDistrictId.Value = districtId;
@@ -141,6 +129,8 @@ namespace InterviewModel.DbHandler
                 salesPerson.Id = Convert.ToInt32(dbReader["id"].ToString());
                 salesPerson.LastName = dbReader["lastName"].ToString();
                 salesPerson.FirstName = dbReader["firstName"].ToString();
+                salesPerson.UserName = dbReader["userName"].ToString();
+                salesPerson.Pass = dbReader["pass"].ToString();
                 salesPerson.Email = dbReader["email"].ToString();
                 salesPerson.PhoneNo = Convert.ToInt32(dbReader["phoneNo"].ToString());
 
